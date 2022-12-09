@@ -4,13 +4,13 @@ namespace Task2
 {
 	public class SubwayStation
 	{
-		public string Code { get; }
-		public List<SubwayStation> Connections { get; } = new List<SubwayStation>();
-		public List<SubwayStation> Intersectrions { get; } = new List<SubwayStation>();
+		public string StationCode { get; }
+		public List<SubwayStation> Connections { get; } = new();
+		public List<SubwayStation> Intersectrions { get; } = new();
 
-		public SubwayStation(string code)
+		public SubwayStation(string stationCode)
 		{
-			Code = code;
+			StationCode = stationCode;
 		}
 	}
 }

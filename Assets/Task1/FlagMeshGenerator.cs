@@ -28,15 +28,15 @@ namespace DefaultNamespace
 			resultMesh.name = "Procedural Flag";
 
 			// Generate vertices
-			var segSize = new Vector2(size.x / pointsCount.x, size.y / pointsCount.y);
+			var segmentSize = new Vector2(size.x / (pointsCount.x - 1), size.y / (pointsCount.y - 1));
 			var vertices = new Vector3[pointsCount.x * pointsCount.y];
 			for (var y = 0; y < pointsCount.y; y++)
 			{
 				for (var x = 0; x < pointsCount.x; x++)
 				{
 					vertices[y * pointsCount.x + x] = new Vector3(
-						flagRoot.x + x * segSize.x,
-						flagRoot.y + y * segSize.y,
+						flagRoot.x + x * segmentSize.x,
+						flagRoot.y + y * segmentSize.y,
 						flagRoot.z);
 				}
 			}

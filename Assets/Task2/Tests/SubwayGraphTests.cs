@@ -7,12 +7,15 @@ namespace Task2.Tests
 {
 	public class SubwayGraphTests
 	{
+		private static string[] _codes = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O" };
 		[Test]
-		public void NoExceptionsOnCreation()
+		public void NoExceptions([ValueSource("_codes")] string code1, [ValueSource("_codes")] string code2)
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				CreateDefaultSubway();
+				var subway = CreateDefaultSubway();
+
+				var shortestPath = subway.CalculateShortestPath(code1, code2);
 			});
 		}
 
@@ -25,8 +28,8 @@ namespace Task2.Tests
 
 			var shortestPath = subway.CalculateShortestPath(code1, code2);
 
-			Assert.AreEqual(shortestPath.Path.Length, 1);
-			Assert.AreEqual(shortestPath.Transfers, 0);
+			Assert.AreEqual(1, shortestPath.Path.Length);
+			Assert.AreEqual(0, shortestPath.Transfers);
 		}
 
 		[Test]
@@ -38,8 +41,21 @@ namespace Task2.Tests
 
 			var shortestPath = subway.CalculateShortestPath(code1, code2);
 
-			Assert.AreEqual(shortestPath.Path.Length, 4);
-			Assert.AreEqual(shortestPath.Transfers, 0);
+			Assert.AreEqual(4, shortestPath.Path.Length);
+			Assert.AreEqual(0, shortestPath.Transfers);
+		}
+
+		[Test]
+		public void FromDToA()
+		{
+			var subway = CreateDefaultSubway();
+			var code1 = "D";
+			var code2 = "A";
+
+			var shortestPath = subway.CalculateShortestPath(code1, code2);
+
+			Assert.AreEqual(4, shortestPath.Path.Length);
+			Assert.AreEqual(0, shortestPath.Transfers);
 		}
 
 		[Test]
@@ -51,8 +67,34 @@ namespace Task2.Tests
 
 			var shortestPath = subway.CalculateShortestPath(code1, code2);
 
-			Assert.AreEqual(shortestPath.Path.Length, 4);
-			Assert.AreEqual(shortestPath.Transfers, 1);
+			Assert.AreEqual(4, shortestPath.Path.Length);
+			Assert.AreEqual(1, shortestPath.Transfers);
+		}
+
+		[Test]
+		public void FromEToG()
+		{
+			var subway = CreateDefaultSubway();
+			var code1 = "E";
+			var code2 = "G";
+
+			var shortestPath = subway.CalculateShortestPath(code1, code2);
+
+			Assert.AreEqual(3, shortestPath.Path.Length);
+			Assert.AreEqual(1, shortestPath.Transfers);
+		}
+
+		[Test]
+		public void FromAToG()
+		{
+			var subway = CreateDefaultSubway();
+			var code1 = "A";
+			var code2 = "G";
+
+			var shortestPath = subway.CalculateShortestPath(code1, code2);
+
+			Assert.AreEqual(6, shortestPath.Path.Length);
+			Assert.AreEqual(2, shortestPath.Transfers);
 		}
 
 		private ISubway CreateDefaultSubway()
@@ -61,7 +103,7 @@ namespace Task2.Tests
 			subway.AddRoute(new[] { "A", "B", "C", "D", "E", "F" });
 			subway.AddRoute(new[] { "B", "H", "J", "F", "G" });
 			subway.AddRoute(new[] { "N", "L", "D", "J", "O" });
-			subway.AddRoute(new[] { "C", "J", "E", "M", "L", "K" });
+			subway.AddRoute(new[] { "C", "J", "E", "M", "L", "K", "C" });
 			return subway;
 		}
 	}

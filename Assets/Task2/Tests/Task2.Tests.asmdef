@@ -6,7 +6,9 @@
         "UnityEditor.TestRunner",
         "Task2"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
