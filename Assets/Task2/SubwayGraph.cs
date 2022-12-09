@@ -26,7 +26,7 @@ namespace Task2
 			SubwayStation prevStation = null;
 			foreach (var stationCode in stationCodes)
 			{
-				// Loop found.
+				// Cycle found.
 				if (firstStation?.StationCode == stationCode)
 				{
 					prevStation.Connections.Add(firstStation);
@@ -72,9 +72,7 @@ namespace Task2
 				foreach (var station in nextStatus.Station.Connections)
 				{
 					if (!visited.Contains(station))
-					{
 						queue.Enqueue(new SubwayStationStatus(nextStatus, station));
-					}
 				}
 
 				foreach (var intersection in nextStatus.Station.Intersectrions)
@@ -83,9 +81,7 @@ namespace Task2
 					foreach (var station in intersection.Connections)
 					{
 						if (!visited.Contains(station))
-						{
 							queue.Enqueue(new SubwayStationStatus(intersectionStatus, station));
-						}
 					}
 				}
 			}
@@ -100,20 +96,24 @@ namespace Task2
 			DecodePath(lastStatus, 1, ref path, ref transfers);
 			return new SubwayPath(path, transfers);
 
+			// Convert linked list described by SubwayStationStatus class to a reversed array.
 			static void DecodePath(SubwayStationStatus lastStatus, int depth, ref string[] path, ref int transfers)
 			{
 				if (lastStatus.PrevStationStatus == null)
+				{
 					path = new string[depth];
+				}
 				else
 				{
-					// TODO
 					var localDepth = depth;
 					if (lastStatus.PrevStationStatus.Station.StationCode != lastStatus.Station.StationCode)
 						localDepth++;
 					else
 						transfers++;
+
 					DecodePath(lastStatus.PrevStationStatus, localDepth, ref path, ref transfers);
 				}
+
 				path[path.Length - depth] = lastStatus.Station.StationCode;
 			}
 		}
