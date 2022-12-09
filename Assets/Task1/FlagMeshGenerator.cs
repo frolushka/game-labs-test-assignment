@@ -1,12 +1,14 @@
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Task1
 {
 	[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 	public class FlagMeshGenerator : MonoBehaviour
 	{
 		[SerializeField] private Vector2 size;
 		[SerializeField] private Vector2Int pointsCount;
+
+		public Vector2 Size => size;
 
 		private MeshFilter _mf;
 
@@ -35,8 +37,8 @@ namespace DefaultNamespace
 				for (var x = 0; x < pointsCount.x; x++)
 				{
 					vertices[y * pointsCount.x + x] = new Vector3(
-						flagRoot.x + x * segmentSize.x,
-						flagRoot.y + y * segmentSize.y,
+						x * segmentSize.x,
+						y * segmentSize.y - size.y,
 						flagRoot.z);
 				}
 			}
