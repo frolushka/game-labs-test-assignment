@@ -4,13 +4,16 @@ using UnityEngine.EventSystems;
 
 namespace Task3.UI
 {
-	public abstract class ShipModuleSlot : MonoBehaviour, IPointerClickHandler
+	public abstract class ShipModuleSlot<TConfig> : MonoBehaviour, IPointerClickHandler
+		where TConfig : ShipModuleConfig
 	{
-		public int SlotIndex { get; private set; }
+		protected Ship _ship;
+		protected int _slotIndex;
 
-		public void Initialize(int slotIndex)
+		public void Initialize(Ship ship, int slotIndex)
 		{
-			SlotIndex = slotIndex;
+			_ship = ship;
+			_slotIndex = slotIndex;
 		}
 
 		void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -18,14 +21,19 @@ namespace Task3.UI
 			if (transform.childCount == 0)
 				return;
 
-			transform.GetChild(0).GetComponent<ShipModule>().Unequip(this);
+			// TODO I don't like this.
+			var module = transform.GetChild(0).GetComponent<ShipModule<TConfig>>();
+			TryUnequip(module.Config);
+			module.RemoveAttachment();
 		}
 
-		public virtual bool CanEquip(ShipModuleConfigBase moduleConfig)
+		public bool CanEquip(TConfig moduleConfig)
 		{
-			return transform.childCount == 0 && CanEquipInternal(moduleConfig);
+			return transform.childCount == 0;
 		}
 
-		protected abstract bool CanEquipInternal(ShipModuleConfigBase moduleConfig);
+		public abstract void TryEquip(TConfig config);
+
+		protected abstract void TryUnequip(TConfig config);
 	}
 }

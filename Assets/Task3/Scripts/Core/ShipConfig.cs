@@ -14,6 +14,7 @@ namespace Task3.Core
 		public int gunSlots;
 		public int upgradeSlots;
 
-		public ShipModuleConfigBase[] suitableModuleConfigs;
+		public ShipGunConfig[] suitableGunConfigs;
+		public ShipUpgradeConfig[] suitableUpgradeConfigs;
 	}
 }

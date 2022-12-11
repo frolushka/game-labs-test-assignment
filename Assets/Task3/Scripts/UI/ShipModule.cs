@@ -1,4 +1,3 @@
-using System;
 using Task3.Core;
 using TMPro;
 using UnityEngine;
@@ -8,11 +7,9 @@ using UnityEngine.UI;
 namespace Task3.UI
 {
 	[RequireComponent(typeof(Image))]
-	public class ShipModule : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+	public abstract class ShipModule<TConfig> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+		where TConfig : ShipModuleConfig
 	{
-		public event Action<ShipModuleConfigBase, int> Equipped;
-		public event Action<ShipModuleConfigBase, int> Unequipped;
-
 		[SerializeField] private TextMeshProUGUI nameLabel;
 
 		private Image _image;
@@ -21,8 +18,8 @@ namespace Task3.UI
 
 		private Transform _defaultParent;
 
-		private ShipModuleConfigBase _config;
-		private int _groupIndex;
+		private TConfig _config;
+		public TConfig Config => _config;
 
 		private void Awake()
 		{
@@ -50,10 +47,11 @@ namespace Task3.UI
 		{
 			foreach (var hovered in eventData.hovered)
 			{
-				if (hovered.TryGetComponent<ShipModuleSlot>(out var slot)
+				if (hovered.TryGetComponent<ShipModuleSlot<TConfig>>(out var slot)
 					&& slot.CanEquip(_config))
 				{
-					Equip(slot);
+					AttachToSlot(slot.transform);
+					slot.TryEquip(_config);
 					return;
 				}
 			}
@@ -65,31 +63,26 @@ namespace Task3.UI
 		{
 			_rectTransform.SetParent(null);
 			_rectTransform.SetParent(_defaultParent);
-			_rectTransform.SetSiblingIndex(_groupIndex);
 			_image.raycastTarget = true;
 		}
 
-		public void Initialize(ShipModuleConfigBase moduleConfig, int groupIndex)
+		public void Initialize(TConfig moduleConfig)
 		{
 			_config = moduleConfig;
-
-			_groupIndex = groupIndex;
 			nameLabel.text = moduleConfig.moduleName;
 		}
 
-		public void Equip(ShipModuleSlot slot)
+		public void AttachToSlot(Transform slotTransform)
 		{
-			_rectTransform.SetParent(slot.transform);
+			_rectTransform.SetParent(slotTransform);
 			_rectTransform.localPosition = Vector2.zero;
 			_image.raycastTarget = false;
-			Equipped?.Invoke(_config, slot.SlotIndex);
 		}
 
-		public void Unequip(ShipModuleSlot slot)
+		public void RemoveAttachment()
 		{
 			ReturnToDefaultParent();
 			_image.raycastTarget = true;
-			Unequipped?.Invoke(_config, slot.SlotIndex);
 		}
 	}
 }

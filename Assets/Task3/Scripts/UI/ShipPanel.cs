@@ -23,13 +23,13 @@ namespace Task3.UI
 			for (var i = 0; i < ship.Config.gunSlots; i++)
 			{
 				var gunSlot = Instantiate(gunSlotPrefab, gunSlotsParent);
-				gunSlot.Initialize(i);
+				gunSlot.Initialize(ship, i);
 			}
 
 			for (var i = 0; i < ship.Config.upgradeSlots; i++)
 			{
 				var upgradeSlot = Instantiate(upgradeSlotPrefab, upgradeSlotsParent);
-				upgradeSlot.Initialize(i);
+				upgradeSlot.Initialize(ship, i);
 			}
 
 			ship.StatsUpdated += HandleStatsUpdate;
@@ -37,9 +37,9 @@ namespace Task3.UI
 
 		private void HandleStatsUpdate()
 		{
-			healthLabel.text = $"Health: {ship.Health}";
-			shieldLabel.text = $"Shield: {ship.Shield}";
-			shieldRegenLabel.text = $"Shield regen: {ship.ShieldRegen}";
+			healthLabel.text = $"Health: {(int)ship.Health}";
+			shieldLabel.text = $"Shield: {(int)ship.Shield}";
+			shieldRegenLabel.text = $"Shield regen: {(int)ship.ShieldRegen}";
 		}
 	}
 }

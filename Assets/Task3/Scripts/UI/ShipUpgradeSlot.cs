@@ -2,11 +2,16 @@ using Task3.Core;
 
 namespace Task3.UI
 {
-	public class ShipUpgradeSlot : ShipModuleSlot
+	public class ShipUpgradeSlot : ShipModuleSlot<ShipUpgradeConfig>
 	{
-		protected override bool CanEquipInternal(ShipModuleConfigBase moduleConfig)
+		public override void TryEquip(ShipUpgradeConfig config)
 		{
-			return moduleConfig is ShipUpgradeConfig;
+			_ship.EquipUpgradeModule(config, _slotIndex);
+		}
+
+		protected override void TryUnequip(ShipUpgradeConfig config)
+		{
+			_ship.UnequipUpgradeModule(config, _slotIndex);
 		}
 	}
 }
