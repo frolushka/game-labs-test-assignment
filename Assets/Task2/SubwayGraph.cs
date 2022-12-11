@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Task2
 {
@@ -114,7 +112,7 @@ namespace Task2
 					DecodePath(lastStatus.PrevStationStatus, localDepth, ref path, ref transfers);
 				}
 
-				path[path.Length - depth] = lastStatus.Station.StationCode;
+				path[^depth] = lastStatus.Station.StationCode;
 			}
 		}
 
