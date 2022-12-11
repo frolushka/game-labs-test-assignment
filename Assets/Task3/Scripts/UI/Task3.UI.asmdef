@@ -1,0 +1,17 @@
+{
+    "name": "Task3.UI",
+    "rootNamespace": "Task3.UI",
+    "references": [
+        "Task3.Logic",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

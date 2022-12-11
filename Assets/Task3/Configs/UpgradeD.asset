@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d83581405843f88e077659706f06fa, type: 3}
+  m_Name: UpgradeD
+  m_EditorClassIdentifier: 
+  moduleName: D
+  icon: {fileID: 21300000, guid: eb732ff32dffb4322bdbd968a810b13b, type: 3}
+  prefab: {fileID: 4489455391017442548, guid: 2ba8f5b988b2c442784aab186e1aa987, type: 3}
+  additionalHealth: 0
+  additionalShield: 0
+  additionalShieldRegen: 0.2
+  reloadDelayBonus: 0
