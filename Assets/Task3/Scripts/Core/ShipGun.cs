@@ -34,6 +34,8 @@ namespace Task3.Core
 
 		private IEnumerator AttackTarget(Ship target)
 		{
+			// NOTE hotfix for oneshot nre
+			yield return null;
 			while (target.IsAlive)
 			{
 				target.TakeDamage(_damage);
