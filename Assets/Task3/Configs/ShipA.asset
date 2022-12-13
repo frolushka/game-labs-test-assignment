@@ -18,11 +18,12 @@ MonoBehaviour:
   shieldRegen: 1
   gunSlots: 2
   upgradeSlots: 2
-  suitableModuleConfigs:
+  suitableGunConfigs:
+  - {fileID: 11400000, guid: b16d2985a1ccb4f958c8051ea19e3784, type: 2}
+  - {fileID: 11400000, guid: 5b228fca2bc70441eb0b714e8e9598dc, type: 2}
+  - {fileID: 11400000, guid: 8818f8f4bfaca424d8b0f28d1c22564b, type: 2}
+  suitableUpgradeConfigs:
   - {fileID: 11400000, guid: 295fb15c33bad479e91851866d349b62, type: 2}
   - {fileID: 11400000, guid: 188482b9fcdfa4478ad771fca4402ab9, type: 2}
   - {fileID: 11400000, guid: b1f3e68932db4425d91e8eb50e4f2aa6, type: 2}
   - {fileID: 11400000, guid: 03a9f4dc432234072ad07fb922788f7c, type: 2}
-  - {fileID: 11400000, guid: 8818f8f4bfaca424d8b0f28d1c22564b, type: 2}
-  - {fileID: 11400000, guid: 5b228fca2bc70441eb0b714e8e9598dc, type: 2}
-  - {fileID: 11400000, guid: b16d2985a1ccb4f958c8051ea19e3784, type: 2}
